@@ -1,18 +1,19 @@
-
 # Zup Deployments
 
 This repository contains the most recent addresses of all Zup deployed smart contracts.
 
 ## Table of Contents
+
 1. [Dependencies](#dependencies)
 2. [Deploying Contracts](#deploying)
    - [Deploying to an Already Deployed Network](#already-deployed)
    - [Deploying to a New Network](#new-network)
-4. [Creating New Deploy Script Conventions](#script)
+3. [Creating New Deploy Script Conventions](#script)
 
 ## Dependencies <a name="dependencies"></a>
 
 - **Foundry**
+
   - To check if Foundry is installed, run `forge --version`. You should see a response like `forge x.x.x`.
   - If Foundry is not installed, follow the [Foundry Installation guide](https://book.getfoundry.sh/getting-started/installation).
 
@@ -35,6 +36,7 @@ make deploy -- ZupRouter sepolia
 ```
 
 **Warnings**:
+
 - The `NETWORK_NAME` parameter should match the one set in the `[rpc_endpoints]` and `[etherscan]` sections of the [foundry.toml](foundry.toml) file.
 - The `make deploy` command uses the `--trezor` flag by default to deploy with a Trezor hardware wallet. If you don't want to use a hardware wallet, you can remove the flag and add the necessary parameters for a non-hardware wallet deployment.
 
@@ -61,6 +63,7 @@ To deploy to a new network, follow these steps before running the deploy command
 #### Adding Required Parameters to Helpers
 
 There are two possible files where you might need to add new parameters:
+
 - **[NetworkHelper.sol](script/helpers/NetworkHelper.sol)**: For external parameters (e.g., WETH address).
 - **[ZupAddresses.sol](script/helpers/ZupAddresses.sol)**: For internal Zup-specific parameters (e.g., Admin address).
 
