@@ -1,7 +1,7 @@
 CONTRACT := $(word 2, $(MAKECMDGOALS))
 ARGS := $(wordlist 3, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 
-.PHONY: update deploy test
+.PHONY: update deploy test FeeController ZupRouter
 
 test:
 	@forge test -vvv
