@@ -29,11 +29,14 @@ jobs:
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
 
-      - name: Run Anvil
-        run: anvil
+      - name: Run Anvil in Background
+        run: nohup anvil & echo $! > anvil_pid.txt
 
       - name: Deploy FeeController to Anvil
         run: make deploy-local -- FeeController
 
       - name: Deploy ZupRouter to Anvil
         run: make deploy-local -- ZupRouter
+
+      - name: "Kill anvil"
+        run: kill $(cat anvil_pid.txt)
