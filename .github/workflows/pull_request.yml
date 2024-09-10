@@ -21,6 +21,7 @@ jobs:
         run: forge test -vvv
 
   check-deploys:
+    needs: run-tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
