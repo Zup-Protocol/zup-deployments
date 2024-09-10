@@ -9,6 +9,7 @@ This repository contains the most recent addresses of all Zup deployed smart con
    - [Deploying to an Already Deployed Network](#already-deployed)
    - [Deploying to a New Network](#new-network)
 3. [Creating New Deploy Script Conventions](#script)
+4. [Smart Contract Addresses](#addresses)
 
 ## Dependencies <a name="dependencies"></a>
 
@@ -34,6 +35,8 @@ make deploy -- {CONTRACT_NAME} {NETWORK_NAME}
 ```bash
 make deploy -- ZupRouter sepolia
 ```
+
+the `make deploy` script should automatically verify the contract in the appropriate block explorer. But sometimes the API can return an error and you will need to verify it manually with foundry by running `forge verify-contract`
 
 **Warnings**:
 
@@ -93,3 +96,6 @@ This step is simple: add a key named `BLOCK_EXPLORER_API_KEY` to your `.env` fil
 
 - All deployment scripts should be placed in the [script](script/) folder.
 - New deployment scripts should follow the naming convention `{CONTRACT_NAME}Deploy` to work with the `make deploy` command. For example: `NewContractDeploy`.
+
+### Smart Contract Addresses <a name="addresses"></a>
+All the most recent deployed smart contracts can be found in the [deployments](deployments/) folder. They are organized by chain ID
