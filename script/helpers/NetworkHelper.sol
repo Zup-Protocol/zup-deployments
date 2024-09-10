@@ -19,6 +19,9 @@ library NetworkHelper {
         // Testnets
         if (block.chainid == 11155111) return address(0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9);
 
+        // local
+        if (block.chainid == 31337) return address(0);
+
         revert UnknownChainConfig(block.chainid);
     }
 }
