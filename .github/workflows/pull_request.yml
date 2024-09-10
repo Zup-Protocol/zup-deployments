@@ -1,0 +1,45 @@
+name: pull_request_analysis
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Update Dependencies
+        run: forge update
+
+      - name: Run Tests
+        run: forge test -vvv
+
+  check-deploys:
+    needs: run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Update Dependencies
+        run: forge update
+
+      - name: Run Anvil in Background
+        run: nohup anvil & echo $! > anvil_pid.txt
+
+      - name: Deploy FeeController to Anvil
+        run: make deploy-local -- FeeController
+
+      - name: Deploy ZupRouter to Anvil
+        run: make deploy-local -- ZupRouter
+
+      - name: "Kill anvil"
+        run: kill $(cat anvil_pid.txt)
